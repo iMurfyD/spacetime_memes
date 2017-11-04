@@ -17,7 +17,7 @@ client = ImgurClient(client_id, client_secret)
 
 # Example request
 
-items = client.gallery()
+items = client.memes_subgallery(sort='viral', page=0)
 
 for item in items:
 
