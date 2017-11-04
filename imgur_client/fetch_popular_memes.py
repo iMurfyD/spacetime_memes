@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 
 from imgurpython import ImgurClient
@@ -19,6 +19,15 @@ client = ImgurClient(client_id, client_secret)
 def find_id(item):
     return item.title
 
+# Extracts a list of images out of link
+def get_images(item):
+    if '/a/' in item.link: # It's an album
+        images = client.get_album_images(item.id)
+        return images
+    else: # It's a single photo
+        images = [client.get_image(item.id)]
+        return images
+
 
 def top_10(time):
     # Request for viral memes from past time 
@@ -30,14 +39,14 @@ def top_10(time):
         if i == 10:
             break
         ret[i]['id'] = find_id(item)
-        ret[i]['link'] = item.link
+        ret[i]['images'] = get_images(item) # Assumes we always get albums
         i = i+1
     return ret
 
 if __name__ == '__main__':
     memes = top_10('week')
     for m in memes:
-        print(m['id'])
+        print(m['id'], "(", len(m['images']), "images )", sep=" " )
 
 if __name__ == '__test_old__':
     timeframe = 'all' 
