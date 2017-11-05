@@ -6,5 +6,6 @@ if __name__ == '__main__':
     memes = imgur.top_10('week')
     ids = mrisa.get_names(memes)
     print(ids)
+    print("Meme engine confirmed")
     
 

@@ -14,8 +14,9 @@ def get_name(image):
 
 def get_names(memes):
     names = list()
-    for m in memes:
-       names.append(get_name(m['link']))
+    # TODO improve this to use more than just the fist image
+    for m in memes: # For now just pass in image from multiimage set 
+       names.append(get_name(m['images'][0]))
     return names 
 
 if __name__ == '__main__':

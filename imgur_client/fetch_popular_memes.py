@@ -23,10 +23,10 @@ def find_id(item):
 def get_images(item):
     if '/a/' in item.link: # It's an album
         images = client.get_album_images(item.id)
-        return images
+        return [img.link for img in images]
     else: # It's a single photo
-        images = [client.get_image(item.id)]
-        return images
+        image = [client.get_image(item.id).link]
+        return image
 
 
 def top_10(time):
@@ -40,14 +40,13 @@ def top_10(time):
             break
         ret[i]['id'] = find_id(item)
         ret[i]['images'] = get_images(item) # Assumes we always get albums
-        ret[i]['link'] = item.link # Add the link in for redundancy
         i = i+1
     return ret
 
 if __name__ == '__main__':
     memes = top_10('week')
     for m in memes:
-        print(m['id'], "(", len(m['images']), "images )", m['link'], sep=" " )
+        print(m['id'], "(", len(m['images']), "images )", m['images'][0],sep=" " )
 
 if __name__ == '__test_old__':
     timeframe = 'all' 
