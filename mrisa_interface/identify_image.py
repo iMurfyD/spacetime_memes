@@ -16,7 +16,15 @@ def get_names(memes):
     names = list()
     # TODO improve this to use more than just the fist image
     for m in memes: # For now just pass in image from multiimage set 
-       names.append(get_name(m['images'][0]))
+        if len(m['images']) > 1:
+            print(m['original link'])
+            all_names = list()
+            for img in m['images']: # Tries all images against google, picks best one
+                all_names.append(get_name(img)) 
+                print(all_names[-1]) # Print the most recent addition
+                names.append(all_names[-1])
+        else: # Only one image per set 
+            names.append(get_name(m['images'][0]))
     return names 
 
 if __name__ == '__main__':

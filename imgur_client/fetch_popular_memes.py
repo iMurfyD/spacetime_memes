@@ -36,11 +36,17 @@ def top_10(time):
     ret = [dict() for i in range(10)] # Array of dicts - each a single meme entry
     i = 0;
     for item in items:
+        print(item.title)
         if i == 10:
             break
-        ret[i]['id'] = find_id(item)
-        ret[i]['images'] = get_images(item) # Assumes we always get albums
-        i = i+1
+        if 'dump' in item.title.lower() or 'reposts' in item.title.lower(): # Try to skip meme dumps and reposts
+            pass
+        imgs = get_images(item) 
+        if len(imgs) < 5: # If larger than 5, probably a dump that we don't want
+            ret[i]['id'] = find_id(item)
+            ret[i]['images'] = get_images(item) # Assumes we always get albums
+            ret[i]['original link'] = item.link
+            i = i+1
     return ret
 
 if __name__ == '__main__':
