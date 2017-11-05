@@ -12,6 +12,12 @@ def get_name(image):
     else:
         return None
 
+def get_names(memes):
+    names = list()
+    for m in memes:
+       names.append(get_name(m['link']))
+    return names 
+
 if __name__ == '__main__':
     print(get_name(sys.argv[1]))
 

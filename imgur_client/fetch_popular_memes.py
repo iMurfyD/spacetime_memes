@@ -40,13 +40,14 @@ def top_10(time):
             break
         ret[i]['id'] = find_id(item)
         ret[i]['images'] = get_images(item) # Assumes we always get albums
+        ret[i]['link'] = item.link # Add the link in for redundancy
         i = i+1
     return ret
 
 if __name__ == '__main__':
     memes = top_10('week')
     for m in memes:
-        print(m['id'], "(", len(m['images']), "images )", sep=" " )
+        print(m['id'], "(", len(m['images']), "images )", m['link'], sep=" " )
 
 if __name__ == '__test_old__':
     timeframe = 'all' 
