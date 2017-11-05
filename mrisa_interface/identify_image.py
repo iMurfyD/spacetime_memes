@@ -14,7 +14,6 @@ def get_name(image):
 
 def get_names(memes):
     names = list()
-    # TODO improve this to use more than just the fist image
     for m in memes: # For now just pass in image from multiimage set 
         if len(m['images']) > 1:
             print(m['original link'])
